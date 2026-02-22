@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import CadastroUsuario from "./paginas/Usuario/CadastroUsuario";
 import Carteira from "./paginas/carteira";
 import CadastroCarteira from "./paginas/carteira/CadastroCarteira";
+import EditarCarteira from "./paginas/carteira/EditarCarteira";
 
 const router = createBrowserRouter([
     {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
     },
     {
         path: '/cadastrocarteira',
+        element: <CadastroCarteira />
+    },
+    {
+        path: '/editarcarteira/:id',
         element: <CadastroCarteira />
     }
 ]);
