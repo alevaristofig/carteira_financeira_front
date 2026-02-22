@@ -9,7 +9,19 @@ const initialState = {
 export const CarteiraSlice = createSlice({
     name: 'usuario',
     initialState,
-    reducers: {}
+    reducers: {
+        salvar: (state) => {
+             state.loading = true;
+        },
+        salvarSucesso: (state) => {
+            state.loading = false;
+            toast.success("Carteira registrada com Sucesso!");
+        },
+        salvarError: (state, action) => {
+            state.loading = false;
+            toast.error(action.payload.message);  
+        }
+    }
 });
 
 export const { salvar, salvarSucesso, salvarError } = CarteiraSlice.actions;
