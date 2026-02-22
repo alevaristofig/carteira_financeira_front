@@ -32,9 +32,22 @@ export const OperacaoSlice = createSlice({
             state.loading = false;
             toast.error(action.payload.message);  
         },
+        depositar: (state,action) => {
+             state.loading = true;
+        },
+        depositarSucesso: (state,action) => {
+            state.loading = false;
+            state.operacoes = action.payload;
+            toast.success("Depósito efetuado com sucesso");
+        },
+        depositarError: (state, action) => {
+            state.loading = false;
+            toast.error(action.payload.message);  
+        },
     }
 });
 
-export const { listar, listarSucesso, listarError, buscar, buscarSucesso, buscarError } = OperacaoSlice.actions;
+export const { listar, listarSucesso, listarError, buscar, buscarSucesso, buscarError,
+               depositar, depositarSucesso, depositarError } = OperacaoSlice.actions;
 
 export default OperacaoSlice.reducer;
