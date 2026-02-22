@@ -21,9 +21,20 @@ export const OperacaoSlice = createSlice({
             state.loading = false;
             toast.error(action.payload.message);  
         },
+        buscar: (state,action) => {
+             state.loading = true;
+        },
+        buscarSucesso: (state,action) => {
+            state.loading = false;
+            state.operacoes = action.payload;
+        },
+        buscarError: (state, action) => {
+            state.loading = false;
+            toast.error(action.payload.message);  
+        },
     }
 });
 
-export const { listar, listarSucesso, listarError } = OperacaoSlice.actions;
+export const { listar, listarSucesso, listarError, buscar, buscarSucesso, buscarError } = OperacaoSlice.actions;
 
 export default OperacaoSlice.reducer;
