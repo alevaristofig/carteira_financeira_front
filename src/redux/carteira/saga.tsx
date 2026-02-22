@@ -1,7 +1,7 @@
 import { all, takeEvery, put, call } from "redux-saga/effects";
 import { AnyAction } from "redux-saga";
 
-import { salvarSucesso, salvarError } from "./slice";
+import { salvarSucesso, salvarError, buscarSucesso, buscarError } from "./slice";
 
 import axios, { AxiosResponse } from 'axios';
 import { ICarteira } from "../../interfaces/carteira.interface";
@@ -20,8 +20,22 @@ function* salvar(action: AnyAction): Generator<any, void, AxiosResponse<ICarteir
   }
 }
 
+function* buscar(action: AnyAction): Generator<any, void, AxiosResponse<ICarteira>>  {
+    try {
+        const response = yield call(axios.get,`http://localhost:8000/api/carteira_financeira/carteira/${action.id}`,{
+            /*headers: {
+                "Authorization": `Bearer ${sessionStorage.getItem('token')}`
+            }*/
+        });
+
+        yield put(buscarSucesso(response.data));
+  } catch(error: any) {    
+     yield put(buscarError(error.response.data.message));
+  }
+}
+
 export default all([
     takeEvery('carteira/salvar', salvar),
-    //takeEvery('pedido/confirmar', confirmar),
+    takeEvery('carteira/buscar', buscar),
     //takeEvery('pedido/atualizarStatus', atualizarStatus),
 ]);

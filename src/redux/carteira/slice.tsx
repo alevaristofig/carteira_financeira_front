@@ -31,10 +31,22 @@ export const CarteiraSlice = createSlice({
         buscarError: (state, action) => {
             state.loading = false;
             toast.error(action.payload.message);  
-        }
+        },
+        atualizar: (state,action) => {
+            state.loading = true;
+        },
+        atualizarSucesso: (state) => {
+            state.loading = false;
+            toast.success("Carteira atualizada com Sucesso!");
+        },
+        atualizarError: (state, action) => {
+            state.loading = false;
+            toast.error(action.payload.message);  
+        },
     }
 });
 
-export const { salvar, salvarSucesso, salvarError, buscar, buscarSucesso, buscarError } = CarteiraSlice.actions;
+export const { salvar, salvarSucesso, salvarError, buscar, buscarSucesso, buscarError,
+               atualizar, atualizarSucesso, atualizarError } = CarteiraSlice.actions;
 
 export default CarteiraSlice.reducer;
