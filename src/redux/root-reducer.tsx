@@ -1,6 +1,12 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-const rootReducer = combineReducers({});
+import UsuarioSlice from "./usuario/slice";
+import CarteiraSlice from "./carteira/slice";
+
+const rootReducer = combineReducers({
+    usuario: UsuarioSlice,
+    carteira: CarteiraSlice
+});
 
 export default rootReducer;
 
