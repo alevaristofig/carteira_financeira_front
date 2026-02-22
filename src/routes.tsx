@@ -7,6 +7,7 @@ import EditarCarteira from "./paginas/carteira/EditarCarteira";
 import Operacao from "./paginas/operacao";
 import CadastroDeposito from "./paginas/operacao/CadastroDeposito";
 import CadastroTransferencia from "./paginas/operacao/CadastroTransferencia";
+import CadastroRevisao from "./paginas/operacao/CadastroRevisao";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
     {
         path: '/operacao/transferencia',
         element: <CadastroTransferencia />
+    },
+    {
+        path: '/operacao/revisar/:id',
+        element: <CadastroRevisao />
     },
 ]);
 

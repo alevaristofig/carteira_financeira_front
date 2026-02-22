@@ -66,7 +66,14 @@ const Operacao = (): ReactElement => {
                                                         <td>{p['descricao']}</td>
                                                         <td>{p['valor'].toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</td> 
                                                         <td>{p['status']}</td>                                                        
-                                                        <td>{formatarData(p['created_at'])}</td>                                                                                                                                  
+                                                        <td>{formatarData(p['created_at'])}</td>  
+                                                        <td>
+                                                            <Link to={`/operacao/revisar/${p['id']}`} 
+                                                                className="btn btn-info float-start me-1 text-white"
+                                                                title='Revisar Operação'>
+                                                                <IconeEditar />        
+                                                            </Link>
+                                                        </td>                                                                                                                                  
                                                     </tr>
                                                 ))
                                         }
