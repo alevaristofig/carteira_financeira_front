@@ -59,5 +59,5 @@ function* depositar(action: AnyAction): Generator<any, void, AxiosResponse<IOper
 export default all([
     takeEvery('operacao/listar', listar),
     takeEvery('operacao/buscar', buscar),
-  //  takeEvery('carteira/atualizar', atualizar),
+    takeEvery('operacao/depositar', depositar),
 ]);
