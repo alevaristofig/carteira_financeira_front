@@ -50,9 +50,21 @@ export const OperacaoSlice = createSlice({
         transferirSucesso: (state,action) => {
             state.loading = false;
             state.operacoes = action.payload;
-            toast.success("Depósito efetuado com sucesso");
+            toast.success("Transferência efetuada com sucesso");
         },
         transferirError: (state, action) => {
+            state.loading = false;
+            toast.error(action.payload.message);  
+        },
+        revisar: (state,action) => {
+             state.loading = true;
+        },
+        revisarSucesso: (state,action) => {
+            state.loading = false;
+            state.operacoes = action.payload;
+            toast.success("Revisão efetuado com sucesso, aguarde a resposta");
+        },
+        revisaoError: (state, action) => {
             state.loading = false;
             toast.error(action.payload.message);  
         },
