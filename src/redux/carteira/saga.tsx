@@ -8,14 +8,24 @@ import { ICarteira } from "../../interfaces/carteira.interface";
 
 function* salvar(action: AnyAction): Generator<any, void, AxiosResponse<ICarteira>>  {
     try {
-        yield call(axios.post,`http://localhost:8000/api/carteira_financeira/carteira`,action.payload,{
+
+        let dados = {
+            'user_id': action.payload.user_id,
+            'numero': action.payload.numero,
+            'titular': action.payload.titular,
+            'saldo': action.payload.saldo,
+            'valorNegativo': action.payload.valorNegativo
+        };
+
+        yield call(axios.post,`http://localhost:8000/api/carteira/carteiras`,dados,{
             /*headers: {
                 "Authorization": `Bearer ${sessionStorage.getItem('token')}`
             }*/
         });
 
         yield put(salvarSucesso());
-  } catch(error: any) {    
+  } catch(error: any) {  
+    console.log(error)  
      yield put(salvarError(error.response.data.message));
   }
 }

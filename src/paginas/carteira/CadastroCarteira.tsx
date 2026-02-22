@@ -1,4 +1,7 @@
 import { ReactElement, useState, SubmitEvent , useEffect } from "react";
+import { useDispatch } from 'react-redux';
+
+import { salvar } from "../../redux/carteira/slice";
 
 import Row  from 'react-bootstrap/Row';
 import Col  from 'react-bootstrap/Col';
@@ -10,10 +13,25 @@ import Cabecalho from "../../components/cabecalho";
 import Menu from "../../components/menu";
 
 const CadastroCarteira = (): ReactElement => {
+
+    const dispatch = useDispatch();
+
+    const [userId] = useState<number>(2);
     const [numero,setNumero] = useState<number>();
     const [titular,setTitular] = useState<string>();
+    const [saldo] = useState<number>(0);
+    const [valorNegativo] = useState<number>(0);
 
     const cadastrar = (e: SubmitEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        
+        dispatch(salvar({
+            'user_id': userId,
+            'numero': numero,
+            'titular': titular,
+            'saldo': saldo,
+            'valorNegativo': valorNegativo
+        }));
     }
 
     return(

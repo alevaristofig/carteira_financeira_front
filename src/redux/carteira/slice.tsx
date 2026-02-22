@@ -7,10 +7,10 @@ const initialState = {
 }
 
 export const CarteiraSlice = createSlice({
-    name: 'usuario',
+    name: 'carteira',
     initialState,
     reducers: {
-        salvar: (state) => {
+        salvar: (state,action) => {                    
              state.loading = true;
         },
         salvarSucesso: (state) => {

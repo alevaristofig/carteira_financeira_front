@@ -1,4 +1,8 @@
 import { ReactElement, useState, SubmitEvent , useEffect } from "react";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+
+import { salvar } from "../../redux/usuario/slice";
 
 import Row  from 'react-bootstrap/Row';
 import Col  from 'react-bootstrap/Col';
@@ -7,29 +11,29 @@ import Form  from 'react-bootstrap/Form';
 import Button  from 'react-bootstrap/Button';
 
 import Cabecalho from "../../components/cabecalho";
-import Menu from "../../components/menu";
 
 const CadastroUsuario = (): ReactElement => {
+
+    const dispatch = useDispatch();
 
     const [nome,setNome] = useState<string>('');
     const [email,setEmail] = useState<string>('');
     const [senha,setSenha] = useState<string>('');
 
-    const cadastrar = (e: SubmitEvent<HTMLFormElement>) => {
+    const cadastrar = (e: SubmitEvent<HTMLFormElement>): void => {
         e.preventDefault();
 
-        let dados = {
-            'name': nome,
+        dispatch(salvar({
+            'nome': nome,
             'email': email,
-            'password': senha
-        }
+            'senha': senha  
+        }));
     }
 
     return(
         <>
             <Cabecalho />
-            <div className='d-flex mt-3'>
-                <Menu />
+            <div className='d-flex mt-3'>               
                 <div className="container-fluid">
                     <Form onSubmit={cadastrar}>
                         <Card>
@@ -42,8 +46,7 @@ const CadastroUsuario = (): ReactElement => {
                                         <Col xs={10}>
                                             <Form.Control 
                                                 type='text' 
-                                                onChange={(e) => setNome(e.target.value)}
-                                                value={nome}
+                                                onChange={(e) => setNome(e.target.value)}                                                
                                                 required
                                             >
                                             </Form.Control>
@@ -56,8 +59,7 @@ const CadastroUsuario = (): ReactElement => {
                                         <Col xs={10}>
                                             <Form.Control 
                                                 type='text' 
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                value={nome}
+                                                onChange={(e) => setEmail(e.target.value)}                                                
                                                 required
                                             >
                                             </Form.Control>
@@ -70,8 +72,7 @@ const CadastroUsuario = (): ReactElement => {
                                         <Col xs={10}>
                                             <Form.Control 
                                                 type='password' 
-                                                onChange={(e) => setSenha(e.target.value)}
-                                                value={nome}
+                                                onChange={(e) => setSenha(e.target.value)}                                               
                                                 required
                                             >
                                             </Form.Control>

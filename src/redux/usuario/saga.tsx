@@ -7,22 +7,23 @@ import axios, { AxiosResponse } from 'axios';
 import { IUsuario } from "../../interfaces/usuario.interface";
 
 function* salvar(action: AnyAction): Generator<any, void, AxiosResponse<IUsuario>>  {
+    alert('entrou saga usuario')
     try {
-        yield call(axios.post,`http://localhost:8000/api/carteira_financeira/usuario`,action.payload,{
-            /*headers: {
-                "Authorization": `Bearer ${sessionStorage.getItem('token')}`
-            }*/
-        });
+            let dados = {
+                name: action.payload.nome,
+                email: action.payload.email,
+                password: action.payload.senha  
+            }
+
+            yield call(axios.post,`http://localhost:8000/api/carteira/usuarios`,dados);
 
         yield put(salvarSucesso());
-  } catch(error: any) {    
-     yield put(salvarError(error.response.data.message));
+  } catch(error: any) {   
+     yield put(salvarError(error.message));
   }
 }
 
 
 export default all([
     takeEvery('usuario/salvar', salvar),
-    //takeEvery('pedido/confirmar', confirmar),
-    //takeEvery('pedido/atualizarStatus', atualizarStatus),
 ]);

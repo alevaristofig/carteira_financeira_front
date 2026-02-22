@@ -10,7 +10,7 @@ export const UsuarioSlice = createSlice({
     name: 'usuario',
     initialState,
     reducers: {
-        salvar: (state) => {
+        salvar: (state,action) => {
              state.loading = true;
         },
         salvarSucesso: (state) => {
