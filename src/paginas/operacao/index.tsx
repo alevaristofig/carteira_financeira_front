@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom";
 
 import { RootState } from "../../redux/root-reducer";
-import { buscar } from "../../redux/carteira/slice";
+import { listar } from "../../redux/operacao/slice";
 
 import Table from 'react-bootstrap/Table';
 
@@ -12,10 +12,10 @@ import { PiNotePencilLight } from "react-icons/pi";
 import Cabecalho from "../../components/cabecalho";
 import Menu from "../../components/menu";
 
-const Carteira = (): ReactElement => {
+const Operacao = (): ReactElement => {
 
     const dispatch = useDispatch();
-    const { loading, carteiras } = useSelector((state: RootState) => state.carteira);
+    const { loading, operacoes } = useSelector((state: RootState) => state.operacao);
     const navigate = useNavigate();
 
     const IconeEditar = PiNotePencilLight as unknown as React.FC<React.SVGProps<SVGSVGElement>>;
@@ -41,7 +41,7 @@ const Carteira = (): ReactElement => {
                                 <span className="visually-hidden">Loading...</span>
                             </div>
                         :
-                             carteiras.length === 0
+                             operacoes.length === 0
                              ?
                                 <div className='me-2 float-start w-100'>
                                     Não existem dados para exibir
@@ -49,29 +49,24 @@ const Carteira = (): ReactElement => {
                              :
                                 <Table className="responsive striped bordered hover">
                                     <thead>
-                                        <tr>                                            
-                                            <th scope='col'>Numero</th>                        
-                                            <th scope='col'>Titular</th>
-                                            <th scope='col'>Saldo</th>                                                                                           
+                                        <tr>
+                                            <th scope='col'>Carteira Id</th>                        
+                                            <th scope='col'>Descrição</th>
+                                            <th scope='col'>Valor</th> 
+                                            <th scope='col'>Status</th>                                               
                                             <th scope='col'>Data</th>                                            
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {
-                                            carteiras.map((p: any,i: number) => 
+                                            operacoes.map((p: any,i: number) => 
                                             (
                                                     <tr key={p['id']}>                                                        
-                                                        <td>{p['numero']}</td>
-                                                        <td>{p['titular']}</td>
-                                                        <td>{p['saldo'].toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</td>                                                                                                               
-                                                        <td>{formatarData(p['created_at'])}</td>   
-                                                        <td>
-                                                            <Link to={`/editarcarteira/${p['id']}`} 
-                                                                className="btn btn-info float-start me-1 text-white"
-                                                                title='Editar'>
-                                                                <IconeEditar />        
-                                                            </Link>
-                                                        </td>                                                                        
+                                                        <td>{p['carteria_id']}</td>
+                                                        <td>{p['descricao']}</td>
+                                                        <td>{p['valor'].toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</td> 
+                                                        <td>{p['status']}</td>                                                        
+                                                        <td>{formatarData(p['created_at'])}</td>                                                                                                                                  
                                                     </tr>
                                                 ))
                                         }
@@ -84,4 +79,4 @@ const Carteira = (): ReactElement => {
     )
 }
 
-export default Carteira; 
+export default Operacao; 
