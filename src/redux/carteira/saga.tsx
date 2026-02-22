@@ -1,7 +1,7 @@
 import { all, takeEvery, put, call } from "redux-saga/effects";
 import { AnyAction } from "redux-saga";
 
-import { salvarSucesso, salvarError, buscarSucesso, buscarError } from "./slice";
+import { salvarSucesso, salvarError, buscarSucesso, buscarError, atualizarSucesso, atualizarError } from "./slice";
 
 import axios, { AxiosResponse } from 'axios';
 import { ICarteira } from "../../interfaces/carteira.interface";
@@ -34,8 +34,30 @@ function* buscar(action: AnyAction): Generator<any, void, AxiosResponse<ICarteir
   }
 }
 
+function* atualizar(action: AnyAction): Generator<any, void, AxiosResponse<ICarteira>>  {
+    try {
+
+        let dados = {
+            'titular': action.payload.titular,
+            'numero': action.payload.numero,
+            'valorNegativo': action.payload.valorNegativo,
+        }
+
+        yield call(axios.patch,`http://localhost:8000/api/carteira/carteira/${action.payload.id}`,dados,{
+            /*headers: {
+                "Authorization": `Bearer ${sessionStorage.getItem('token')}`
+            }*/
+        });
+
+        yield put(atualizarSucesso());
+
+    } catch(error: any) {    
+        yield put(atualizarError(error.response.data.message));
+    }
+}
+
 export default all([
     takeEvery('carteira/salvar', salvar),
     takeEvery('carteira/buscar', buscar),
-    //takeEvery('pedido/atualizarStatus', atualizarStatus),
+    takeEvery('carteira/atualizar', atualizar),
 ]);
