@@ -6,11 +6,23 @@ import { salvarSucesso, salvarError } from "./slice";
 import axios, { AxiosResponse } from 'axios';
 import { IUsuario } from "../../interfaces/usuario.interface";
 
-function* salvar(action: AnyAction): Generator<any, void, AxiosResponse<IUsuario>>  {}
+function* salvar(action: AnyAction): Generator<any, void, AxiosResponse<IUsuario>>  {
+    try {
+        yield call(axios.post,`http://localhost:8000/api/carteira_financeira/usuario`,action.payload,{
+            /*headers: {
+                "Authorization": `Bearer ${sessionStorage.getItem('token')}`
+            }*/
+        });
+
+        yield put(salvarSucesso());
+  } catch(error: any) {    
+     yield put(salvarError(error.response.data.message));
+  }
+}
 
 
 export default all([
-    //takeEvery('pedido/listar', listar),
+    takeEvery('usuario/salvar', salvar),
     //takeEvery('pedido/confirmar', confirmar),
     //takeEvery('pedido/atualizarStatus', atualizarStatus),
 ]);
