@@ -9,9 +9,21 @@ const initialState = {
 export const UsuarioSlice = createSlice({
     name: 'usuario',
     initialState,
-    reducers: {}
+    reducers: {
+        salvar: (state) => {
+             state.loading = true;
+        },
+        salvarSucesso: (state) => {
+            state.loading = false;
+            toast.success("Usuário registrado com Sucesso!");
+        },
+        salvarError: (state, action) => {
+            state.loading = false;
+            toast.error(action.payload.message);  
+        }
+    }
 });
 
-export const {} = UsuarioSlice.actions;
+export const { salvar, salvarSucesso, salvarError } = UsuarioSlice.actions;
 
 export default UsuarioSlice.reducer;
