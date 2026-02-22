@@ -73,6 +73,6 @@ export const OperacaoSlice = createSlice({
 
 export const { listar, listarSucesso, listarError, buscar, buscarSucesso, buscarError,
                depositar, depositarSucesso, depositarError, transferir, transferirSucesso, 
-               transferirError } = OperacaoSlice.actions;
+               transferirError, revisar, revisarSucesso, revisaoError } = OperacaoSlice.actions;
 
 export default OperacaoSlice.reducer;

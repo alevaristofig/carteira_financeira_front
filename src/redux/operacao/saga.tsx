@@ -2,7 +2,7 @@ import { all, takeEvery, put, call } from "redux-saga/effects";
 import { AnyAction } from "redux-saga";
 
 import { listarSucesso, listarError, buscarSucesso, buscarError, depositarSucesso, depositarError,
-         transferirSucesso, transferirError } from "./slice";
+         transferirSucesso, transferirError, revisarSucesso, revisaoError } from "./slice";
 
 import axios, { AxiosResponse } from 'axios';
 import { IOperacao } from "../../interfaces/operacao.interface";
@@ -79,9 +79,30 @@ function* transferir(action: AnyAction): Generator<any, void, AxiosResponse<IOpe
   }
 }
 
+function* revisar(action: AnyAction): Generator<any, void, AxiosResponse<IOperacao>>  {
+    try {
+
+        let dados = {
+            id: action.payload.id,
+            mensagem: action.payload.mensagem,
+        }
+
+        const response = yield call(axios.post,`http://localhost:8000/api/carteira_financeira/operacao/`,dados,{
+            /*headers: {
+                "Authorization": `Bearer ${sessionStorage.getItem('token')}`
+            }*/
+        });
+
+        yield put(revisarSucesso(response.data));
+  } catch(error: any) {    
+     yield put(revisaoError(error.response.data.message));
+  }
+}
+
 export default all([
     takeEvery('operacao/listar', listar),
     takeEvery('operacao/buscar', buscar),
     takeEvery('operacao/depositar', depositar),
     takeEvery('operacao/transferir', transferir),
+    takeEvery('operacao/revisar', revisar),
 ]);
