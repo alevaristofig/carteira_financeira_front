@@ -20,6 +20,16 @@ const Operacao = (): ReactElement => {
 
     const IconeEditar = PiNotePencilLight as unknown as React.FC<React.SVGProps<SVGSVGElement>>;
 
+    useEffect(() => {
+        if(sessionStorage.getItem('token') === null) {            
+            navigate('/login');
+        } 
+
+        dispatch(listar({
+            'id': sessionStorage.getItem('id')
+        }));
+    },[]);
+
     const formatarData = (data: string) => {
         const dataFormatada = new Date(data);
 
@@ -49,8 +59,7 @@ const Operacao = (): ReactElement => {
                              :
                                 <Table className="responsive striped bordered hover">
                                     <thead>
-                                        <tr>
-                                            <th scope='col'>Carteira Id</th>                        
+                                        <tr>                                                              
                                             <th scope='col'>Descrição</th>
                                             <th scope='col'>Valor</th> 
                                             <th scope='col'>Status</th>                                               
@@ -61,8 +70,7 @@ const Operacao = (): ReactElement => {
                                         {
                                             operacoes.map((p: any,i: number) => 
                                             (
-                                                    <tr key={p['id']}>                                                        
-                                                        <td>{p['carteria_id']}</td>
+                                                    <tr key={p['id']}>                                                                                                                
                                                         <td>{p['descricao']}</td>
                                                         <td>{p['valor'].toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</td> 
                                                         <td>{p['status']}</td>                                                        

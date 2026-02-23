@@ -21,7 +21,7 @@ export const CarteiraSlice = createSlice({
         },
         salvarError: (state, action) => {
             state.loading = false;
-            toast.error(action.payload.message);  
+            toast.error(action.payload);  
         },
         buscar: (state,action) => {
              state.loading = true;
@@ -32,7 +32,7 @@ export const CarteiraSlice = createSlice({
         },
         buscarError: (state, action) => {
             state.loading = false;
-            toast.error(action.payload.message);  
+            toast.error(action.payload);  
         }
     }
 });

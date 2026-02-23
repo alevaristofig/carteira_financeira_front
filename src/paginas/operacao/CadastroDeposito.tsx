@@ -18,7 +18,8 @@ const CadastroDeposito = (): ReactElement => {
 
     const [carteira,setCarteira] = useState<number>();
     const [valor,setValor] = useState<number>();
-    const [descricao] = useState<string>('depósito');
+    const [descricao] = useState<string>('');
+    const [tipo_operacao] = useState<string>('depósito');
     const [status] = useState<string>('aprovado');
 
     const cadastrar = (e: SubmitEvent<HTMLFormElement>) => {
@@ -26,6 +27,7 @@ const CadastroDeposito = (): ReactElement => {
 
         dispatch(depositar({
             'carteira': carteira,
+            'tipo_operacao': tipo_operacao,
             'descricao': descricao,
             'valor': valor,
             'status': status,            
@@ -72,7 +74,7 @@ const CadastroDeposito = (): ReactElement => {
                                     </Row>
                                 </Form.Group>
                                 <Form.Group className='mt-4'>
-                                    <Button type='submit'>Salvar</Button>
+                                    <Button type='submit'>Depositar</Button>
                                 </Form.Group> 
                             </Card.Body>
                         </Card>

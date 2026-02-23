@@ -18,8 +18,7 @@ export const OperacaoSlice = createSlice({
             state.operacoes = action.payload;
         },
         listarError: (state, action) => {
-            state.loading = false;
-            toast.error(action.payload.message);  
+            state.loading = false;            
         },
         buscar: (state,action) => {
              state.loading = true;
@@ -29,8 +28,7 @@ export const OperacaoSlice = createSlice({
             state.operacoes = action.payload;
         },
         buscarError: (state, action) => {
-            state.loading = false;
-            toast.error(action.payload.message);  
+            state.loading = false;             
         },
         depositar: (state,action) => {            
             state.loading = true;
@@ -42,7 +40,7 @@ export const OperacaoSlice = createSlice({
         },
         depositarError: (state, action) => {
             state.loading = false;
-            toast.error(action.payload.message);  
+            toast.error(action.payload);  
         },
         transferir: (state,action) => {
              state.loading = true;
@@ -54,7 +52,7 @@ export const OperacaoSlice = createSlice({
         },
         transferirError: (state, action) => {
             state.loading = false;
-            toast.error(action.payload.message);  
+            toast.error(action.payload);  
         },
         revisar: (state,action) => {
              state.loading = true;
@@ -66,7 +64,7 @@ export const OperacaoSlice = createSlice({
         },
         revisaoError: (state, action) => {
             state.loading = false;
-            toast.error(action.payload.message);  
+            toast.error(action.payload);  
         },
     }
 });

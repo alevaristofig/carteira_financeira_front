@@ -10,7 +10,24 @@ import axios from 'axios';
 
 const Cabecalho = (): ReactElement => {
 
-     const logout = () => {}
+    const navigate = useNavigate();
+
+     const logout = () => {
+        axios.get(`http://localhost:8000/api/carteira/logout`,{
+            headers: {
+                        "Authorization": `Bearer ${sessionStorage.getItem('token')}`                  
+                     }
+            })         
+            .then(() => {                                			 
+			    sessionStorage.removeItem('token');
+			    sessionStorage.removeItem('id');
+
+			    navigate('/login', {replace: true});
+          })
+          .catch((erro) => {
+              toast.error('Ocorreu um erro e a operação não foi realizada');                  
+          });
+     }
 
      return (
         <>

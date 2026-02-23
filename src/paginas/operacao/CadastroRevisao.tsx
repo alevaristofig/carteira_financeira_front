@@ -1,4 +1,9 @@
 import { ReactElement, useState, SubmitEvent , useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from "react-router-dom";
+
+import { RootState } from "../../redux/root-reducer";
+import { buscar, revisar } from "../../redux/operacao/slice";
 
 import Row  from 'react-bootstrap/Row';
 import Col  from 'react-bootstrap/Col';
@@ -11,11 +16,29 @@ import Menu from "../../components/menu";
 
 const CadastroRevisao = (): ReactElement => {
 
-    const [carteira,setCarteira] = useState<number>();
-    const [valor,setValor] = useState<number>();
+    const dispatch = useDispatch();
+    const { operacoes } = useSelector((state: RootState) => state.operacao);
+    const navigate = useNavigate();
+
     const [descricao,setDescricao] = useState<string>('');
 
-    const depositar = (e: SubmitEvent<HTMLFormElement>) => {
+    useEffect(() => {
+        if(sessionStorage.getItem('token') === null) {            
+            navigate('/login');
+        } 
+
+        dispatch(buscar({
+            'id': sessionStorage.getItem('id')
+        }));
+    },[]);
+
+    const revisarOperacao = (e: SubmitEvent<HTMLFormElement>) => {
+         e.preventDefault();
+
+         dispatch(revisar({
+            'id': operacoes[0]?.['id'],
+            'descricao': descricao
+        }));
     }
 
     return(
@@ -23,21 +46,20 @@ const CadastroRevisao = (): ReactElement => {
             <Cabecalho />
             <div className='d-flex mt-3'>
                 <Menu />
-                <div className="container-fluid">
-                    <Form onSubmit={depositar}>
+                <div className="container-fluid">                                   
+                    <Form onSubmit={revisarOperacao}>
                         <Card>
                             <Card.Body>
                                 <Form.Group className='mb-4'>
                                     <Row className="mb-4">
                                         <Col xs={1}>
-                                            <Form.Label>Carteira*:</Form.Label>                                             
+                                            <Form.Label>Operação*:</Form.Label>                                             
                                         </Col>
                                         <Col xs={10}>
                                             <Form.Control 
-                                                type='text' 
-                                                onChange={(e) => setCarteira(parseInt(e.target.value))}
-                                                value={carteira}
-                                                required
+                                                type='text'                                                 
+                                                value={operacoes[0]?.['tipo_operacao']}                                                
+                                                disabled
                                             >
                                             </Form.Control>
                                         </Col>
@@ -48,10 +70,9 @@ const CadastroRevisao = (): ReactElement => {
                                         </Col>
                                         <Col xs={10}>
                                             <Form.Control 
-                                                type='text' 
-                                                onChange={(e) => setValor(parseInt(e.target.value))}
-                                                value={valor}
-                                                required
+                                                type='text'                                                 
+                                                value={operacoes[0]?.['valor']}                                                
+                                                disabled
                                             >
                                             </Form.Control>
                                         </Col>
@@ -72,7 +93,7 @@ const CadastroRevisao = (): ReactElement => {
                                     </Row>
                                 </Form.Group>
                                 <Form.Group className='mt-4'>
-                                    <Button type='submit'>Salvar</Button>
+                                    <Button type='submit'>Revisar</Button>
                                 </Form.Group> 
                             </Card.Body>
                         </Card>

@@ -25,8 +25,8 @@ function* salvar(action: AnyAction): Generator<any, void, AxiosResponse<ICarteir
         });
 
         yield put(salvarSucesso());
-  } catch(error: any) {       
-     yield put(salvarError(error.response.data.message));
+  } catch(msg: any) {       
+     yield put(salvarError(msg.error));
   }
 }
 
@@ -41,7 +41,7 @@ function* buscar(action: AnyAction): Generator<any, void, AxiosResponse<ICarteir
 
         yield put(buscarSucesso(response.data));
   } catch(error: any) {    
-     yield put(buscarError(error.response.data.message));
+     yield put(buscarError('Erro ao buscar a carteira'));
   }
 }
 
