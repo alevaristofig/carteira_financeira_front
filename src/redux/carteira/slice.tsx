@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from 'react-toastify';
 
+import { ICarteira } from "../../interfaces/carteira.interface";
+
 const initialState = {
     loading: false,
-    carteiras: [],
+    carteiras: []
 }
 
 export const CarteiraSlice = createSlice({

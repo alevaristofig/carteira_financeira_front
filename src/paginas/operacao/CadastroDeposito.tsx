@@ -1,4 +1,7 @@
 import { ReactElement, useState, SubmitEvent , useEffect } from "react";
+import { useDispatch } from 'react-redux';
+
+import { depositar } from "../../redux/operacao/slice";
 
 import Row  from 'react-bootstrap/Row';
 import Col  from 'react-bootstrap/Col';
@@ -11,10 +14,22 @@ import Menu from "../../components/menu";
 
 const CadastroDeposito = (): ReactElement => {
 
+    const dispatch = useDispatch();
+
     const [carteira,setCarteira] = useState<number>();
     const [valor,setValor] = useState<number>();
+    const [descricao] = useState<string>('depósito');
+    const [status] = useState<string>('aprovado');
 
-    const depositar = (e: SubmitEvent<HTMLFormElement>) => {
+    const cadastrar = (e: SubmitEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        dispatch(depositar({
+            'carteira': carteira,
+            'descricao': descricao,
+            'valor': valor,
+            'status': status,            
+        }));
     }
 
     return(
@@ -23,7 +38,7 @@ const CadastroDeposito = (): ReactElement => {
             <div className='d-flex mt-3'>
                 <Menu />
                 <div className="container-fluid">
-                    <Form onSubmit={depositar}>
+                    <Form onSubmit={cadastrar}>
                         <Card>
                             <Card.Body>
                                 <Form.Group className='mb-4'>

@@ -20,6 +20,16 @@ const Carteira = (): ReactElement => {
 
     const IconeEditar = PiNotePencilLight as unknown as React.FC<React.SVGProps<SVGSVGElement>>;
 
+    useEffect(() => {
+        /*if(sessionStorage.getItem('token') === null) {            
+            navigate('/login');
+        } */
+
+        dispatch(buscar({
+            'id': 1
+        }));
+    },[]);
+
     const formatarData = (data: string) => {
         const dataFormatada = new Date(data);
 
@@ -32,7 +42,7 @@ const Carteira = (): ReactElement => {
         <>
             <Cabecalho />
             <div className='d-flex mt-3'>
-                <Menu />
+                <Menu />                              
                  <div className="container-fluid">
                     {
                         loading
@@ -53,11 +63,12 @@ const Carteira = (): ReactElement => {
                                             <th scope='col'>Numero</th>                        
                                             <th scope='col'>Titular</th>
                                             <th scope='col'>Saldo</th>                                                                                           
-                                            <th scope='col'>Data</th>                                            
+                                            <th scope='col'>Data</th> 
+                                            <th scope='col'>#</th>                                            
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {
+                                        {                                                                                                                              
                                             carteiras.map((p: any,i: number) => 
                                             (
                                                     <tr key={p['id']}>                                                        

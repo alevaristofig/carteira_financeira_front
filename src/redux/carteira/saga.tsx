@@ -6,6 +6,7 @@ import { salvarSucesso, salvarError, buscarSucesso, buscarError, atualizarSucess
 import axios, { AxiosResponse } from 'axios';
 import { ICarteira } from "../../interfaces/carteira.interface";
 
+
 function* salvar(action: AnyAction): Generator<any, void, AxiosResponse<ICarteira>>  {
     try {
 
@@ -24,15 +25,15 @@ function* salvar(action: AnyAction): Generator<any, void, AxiosResponse<ICarteir
         });
 
         yield put(salvarSucesso());
-  } catch(error: any) {  
-    console.log(error)  
+  } catch(error: any) {       
      yield put(salvarError(error.response.data.message));
   }
 }
 
-function* buscar(action: AnyAction): Generator<any, void, AxiosResponse<ICarteira>>  {
+function* buscar(action: AnyAction): Generator<any, void, AxiosResponse<ICarteira[]>>  {
     try {
-        const response = yield call(axios.get,`http://localhost:8000/api/carteira_financeira/carteira/${action.id}`,{
+        console.log(action.id)
+        const response = yield call(axios.get,`http://localhost:8000/api/carteira/carteiras/${action.payload.id}`,{
             /*headers: {
                 "Authorization": `Bearer ${sessionStorage.getItem('token')}`
             }*/

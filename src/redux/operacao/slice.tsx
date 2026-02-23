@@ -7,7 +7,7 @@ const initialState = {
 }
 
 export const OperacaoSlice = createSlice({
-    name: 'usuario',
+    name: 'operacao',
     initialState,
     reducers: {
         listar: (state,action) => {
@@ -32,8 +32,8 @@ export const OperacaoSlice = createSlice({
             state.loading = false;
             toast.error(action.payload.message);  
         },
-        depositar: (state,action) => {
-             state.loading = true;
+        depositar: (state,action) => {            
+            state.loading = true;
         },
         depositarSucesso: (state,action) => {
             state.loading = false;

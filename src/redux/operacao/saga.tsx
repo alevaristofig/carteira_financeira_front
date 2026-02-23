@@ -39,13 +39,13 @@ function* depositar(action: AnyAction): Generator<any, void, AxiosResponse<IOper
     try {
 
         let dados = {
-            carteira_id: action.payload.carteiraId,
+            carteira_id: action.payload.carteira,
             descricao: action.payload.descricao,
             valor: action.payload.valor,
             status: action.payload.status
         }
 
-        const response = yield call(axios.post,`http://localhost:8000/api/carteira_financeira/operacao/`,dados,{
+        const response = yield call(axios.post,`http://localhost:8000/api/carteira/operacoes/depositar`,dados,{
             /*headers: {
                 "Authorization": `Bearer ${sessionStorage.getItem('token')}`
             }*/
