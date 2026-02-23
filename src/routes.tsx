@@ -4,7 +4,6 @@ import Login from "./paginas/login";
 import CadastroUsuario from "./paginas/Usuario/CadastroUsuario";
 import Carteira from "./paginas/carteira";
 import CadastroCarteira from "./paginas/carteira/CadastroCarteira";
-import EditarCarteira from "./paginas/carteira/EditarCarteira";
 import Operacao from "./paginas/operacao";
 import CadastroDeposito from "./paginas/operacao/CadastroDeposito";
 import CadastroTransferencia from "./paginas/operacao/CadastroTransferencia";
@@ -26,10 +25,6 @@ const router = createBrowserRouter([
     {
         path: '/cadastrocarteira',
         element: <CadastroCarteira />
-    },
-    {
-        path: '/editarcarteira/:id',
-        element: <EditarCarteira />
     },
     {
         path: '/operacao/:id',

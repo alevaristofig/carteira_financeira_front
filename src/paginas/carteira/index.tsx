@@ -21,12 +21,12 @@ const Carteira = (): ReactElement => {
     const IconeEditar = PiNotePencilLight as unknown as React.FC<React.SVGProps<SVGSVGElement>>;
 
     useEffect(() => {
-        /*if(sessionStorage.getItem('token') === null) {            
+        if(sessionStorage.getItem('token') === null) {            
             navigate('/login');
-        } */
+        } 
 
         dispatch(buscar({
-            'id': 1
+            'id': sessionStorage.getItem('id')
         }));
     },[]);
 
@@ -75,14 +75,7 @@ const Carteira = (): ReactElement => {
                                                         <td>{p['numero']}</td>
                                                         <td>{p['titular']}</td>
                                                         <td>{p['saldo'].toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</td>                                                                                                               
-                                                        <td>{formatarData(p['created_at'])}</td>   
-                                                        <td>
-                                                            <Link to={`/editarcarteira/${p['id']}`} 
-                                                                className="btn btn-info float-start me-1 text-white"
-                                                                title='Editar'>
-                                                                <IconeEditar />        
-                                                            </Link>
-                                                        </td>                                                                        
+                                                        <td>{formatarData(p['created_at'])}</td>                                                                          
                                                     </tr>
                                                 ))
                                         }

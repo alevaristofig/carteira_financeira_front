@@ -77,7 +77,7 @@ const Login = (): ReactElement => {
                                     </Row>
                                 </Form.Group>
                                 <Form.Group className='mt-4'>
-                                    <Button type='submit'>Salvar</Button>
+                                    <Button type='submit'>Logar</Button>
                                 </Form.Group> 
                             </Card.Body>
                         </Card>
