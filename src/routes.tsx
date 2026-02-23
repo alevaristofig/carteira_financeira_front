@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
+import Login from "./paginas/login";
 import CadastroUsuario from "./paginas/Usuario/CadastroUsuario";
 import Carteira from "./paginas/carteira";
 import CadastroCarteira from "./paginas/carteira/CadastroCarteira";
@@ -10,6 +11,10 @@ import CadastroTransferencia from "./paginas/operacao/CadastroTransferencia";
 import CadastroRevisao from "./paginas/operacao/CadastroRevisao";
 
 const router = createBrowserRouter([
+    {
+        path: '/login',
+        element: <Login />
+    },
     {
         path: '/cadastrousuario',
         element: <CadastroUsuario />
