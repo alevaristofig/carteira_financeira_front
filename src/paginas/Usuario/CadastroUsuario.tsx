@@ -15,6 +15,7 @@ import Cabecalho from "../../components/cabecalho";
 const CadastroUsuario = (): ReactElement => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [nome,setNome] = useState<string>('');
     const [email,setEmail] = useState<string>('');
@@ -28,6 +29,8 @@ const CadastroUsuario = (): ReactElement => {
             'email': email,
             'senha': senha  
         }));
+
+        navigate('/login');
     }
 
     return(

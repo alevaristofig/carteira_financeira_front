@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import axios from "axios";
 
-import { salvar } from "../../redux/usuario/slice";
-
 import Row  from 'react-bootstrap/Row';
 import Col  from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
@@ -77,7 +75,14 @@ const Login = (): ReactElement => {
                                     </Row>
                                 </Form.Group>
                                 <Form.Group className='mt-4'>
-                                    <Button type='submit'>Logar</Button>
+                                    <Row className="mb-4">
+                                        <Col xs={1}>
+                                            <Button type='submit'>Logar</Button>   
+                                        </Col>     
+                                        <Col xs={1}>                                            
+                                            <Button as="a" href="cadastrousuario" variant="primary">Cadastrar</Button>
+                                        </Col>  
+                                    </Row>                                    
                                 </Form.Group> 
                             </Card.Body>
                         </Card>

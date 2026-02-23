@@ -31,18 +31,13 @@ function* salvar(action: AnyAction): Generator<any, void, AxiosResponse<ICarteir
 }
 
 function* buscar(action: AnyAction): Generator<any, void, AxiosResponse<ICarteira[]>>  {
-    try {
-        console.log(action.id)
-        const response = yield call(axios.get,`http://localhost:8000/api/carteira/carteiras/${action.payload.id}`,{
+    const response = yield call(axios.get,`http://localhost:8000/api/carteira/carteiras/${action.payload.id}`,{
             headers: {
                 "Authorization": `Bearer ${sessionStorage.getItem('token')}`
             }
-        });
+    });
 
-        yield put(buscarSucesso(response.data));
-  } catch(error: any) {    
-     yield put(buscarError('Erro ao buscar a carteira'));
-  }
+    yield put(buscarSucesso(response.data));
 }
 
 export default all([

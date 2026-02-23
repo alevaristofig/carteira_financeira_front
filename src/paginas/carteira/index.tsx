@@ -6,6 +6,7 @@ import { RootState } from "../../redux/root-reducer";
 import { buscar } from "../../redux/carteira/slice";
 
 import Table from 'react-bootstrap/Table';
+import Button  from 'react-bootstrap/Button';
 
 import { PiNotePencilLight } from "react-icons/pi";
 
@@ -18,16 +19,17 @@ const Carteira = (): ReactElement => {
     const { loading, carteiras } = useSelector((state: RootState) => state.carteira);
     const navigate = useNavigate();
 
-    const IconeEditar = PiNotePencilLight as unknown as React.FC<React.SVGProps<SVGSVGElement>>;
-
     useEffect(() => {
         if(sessionStorage.getItem('token') === null) {            
             navigate('/login');
         } 
 
-        dispatch(buscar({
-            'id': sessionStorage.getItem('id')
-        }));
+        setTimeout(() => {
+            dispatch(buscar({
+                'id': sessionStorage.getItem('id')
+            }));        
+        },400);
+        
     },[]);
 
     const formatarData = (data: string) => {
@@ -42,8 +44,9 @@ const Carteira = (): ReactElement => {
         <>
             <Cabecalho />
             <div className='d-flex mt-3'>
-                <Menu />                              
+                <Menu />                                             
                  <div className="container-fluid">
+                    <Button as="a" href="cadastrocarteira" variant="primary">Cadastrar</Button>
                     {
                         loading
                         ?
@@ -63,8 +66,7 @@ const Carteira = (): ReactElement => {
                                             <th scope='col'>Numero</th>                        
                                             <th scope='col'>Titular</th>
                                             <th scope='col'>Saldo</th>                                                                                           
-                                            <th scope='col'>Data</th> 
-                                            <th scope='col'>#</th>                                            
+                                            <th scope='col'>Data</th>                                                                                      
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -7,7 +7,6 @@ import axios, { AxiosResponse } from 'axios';
 import { IUsuario } from "../../interfaces/usuario.interface";
 
 function* salvar(action: AnyAction): Generator<any, void, AxiosResponse<IUsuario>>  {
-    alert('entrou saga usuario')
     try {
             let dados = {
                 name: action.payload.nome,
