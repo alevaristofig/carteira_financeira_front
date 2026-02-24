@@ -61,49 +61,48 @@ const CadastroCarteira = (): ReactElement => {
                             <span className="visually-hidden">Loading...</span>
                         </div>
                     :
-                        ''
-                }
-                <div className="container-fluid">
-                    <Form onSubmit={cadastrar}>
-                        <Card>
-                            <Card.Body>
-                                <Form.Group className='mb-4'>
-                                    <Row className="mb-4">
-                                        <Col xs={1}>
-                                             <Form.Label>Titular*:</Form.Label>                                             
-                                        </Col>
-                                        <Col xs={10}>
-                                            <Form.Control 
-                                                type='text' 
-                                                onChange={(e) => setTitular(e.target.value)}
-                                                value={titular}
-                                                required
-                                            >
-                                            </Form.Control>
-                                        </Col>
-                                    </Row>
-                                    <Row className="mb-4">
-                                        <Col xs={1}>
-                                             <Form.Label>Número da Carteira*:</Form.Label>                                             
-                                        </Col>
-                                        <Col xs={10}>
-                                            <Form.Control 
-                                                type='text' 
-                                                onChange={(e) => setNumero(parseInt(e.target.value))}
-                                                value={numero}
-                                                required
-                                            >
-                                            </Form.Control>
-                                        </Col>
-                                    </Row>
-                                </Form.Group>
-                                <Form.Group className='mt-4'>
-                                    <Button type='submit'>Salvar</Button>
-                                </Form.Group> 
-                            </Card.Body>
-                        </Card>
-                    </Form>
-                </div>
+                        <div className="container-fluid">
+                            <Form onSubmit={cadastrar}>
+                                <Card>
+                                    <Card.Body>
+                                        <Form.Group className='mb-4'>
+                                            <Row className="mb-4">
+                                                <Col xs={1}>
+                                                    <Form.Label>Titular*:</Form.Label>                                             
+                                                </Col>
+                                                <Col xs={10}>
+                                                    <Form.Control 
+                                                        type='text' 
+                                                        onChange={(e) => setTitular(e.target.value)}
+                                                        value={titular}
+                                                        required
+                                                    >
+                                                    </Form.Control>
+                                                </Col>
+                                            </Row>
+                                            <Row className="mb-4">
+                                                <Col xs={1}>
+                                                    <Form.Label>Número da Carteira*:</Form.Label>                                             
+                                                </Col>
+                                                <Col xs={10}>
+                                                    <Form.Control 
+                                                        type='text' 
+                                                        onChange={(e) => setNumero(parseInt(e.target.value))}
+                                                        value={numero}
+                                                        required
+                                                    >
+                                                    </Form.Control>
+                                                </Col>
+                                            </Row>
+                                        </Form.Group>
+                                        <Form.Group className='mt-4'>
+                                            <Button type='submit'>Salvar</Button>
+                                        </Form.Group> 
+                                    </Card.Body>
+                                </Card>
+                            </Form>
+                        </div>
+                }                
             </div>
         </>
     )

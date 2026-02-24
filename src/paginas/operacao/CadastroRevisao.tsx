@@ -26,9 +26,7 @@ const CadastroRevisao = (): ReactElement => {
     useEffect(() => {
         if(sessionStorage.getItem('token') === null) {            
             navigate('/login');
-        } 
-
-        setLoading(true);
+        }        
 
         dispatch(buscar({
             'id': sessionStorage.getItem('id')
@@ -36,7 +34,9 @@ const CadastroRevisao = (): ReactElement => {
     },[]);
 
     const revisarOperacao = (e: SubmitEvent<HTMLFormElement>) => {
-         e.preventDefault();
+        e.preventDefault();
+
+        setLoading(true);
 
          dispatch(revisar({
             'id': operacoes[0]?.['id'],
@@ -56,61 +56,60 @@ const CadastroRevisao = (): ReactElement => {
                             <span className="visually-hidden">Loading...</span>
                         </div>
                     :
-                        ''
-                }
-                <div className="container-fluid">                                   
-                    <Form onSubmit={revisarOperacao}>
-                        <Card>
-                            <Card.Body>
-                                <Form.Group className='mb-4'>
-                                    <Row className="mb-4">
-                                        <Col xs={1}>
-                                            <Form.Label>Operação*:</Form.Label>                                             
-                                        </Col>
-                                        <Col xs={10}>
-                                            <Form.Control 
-                                                type='text'                                                 
-                                                value={operacoes[0]?.['tipo_operacao']}                                                
-                                                disabled
-                                            >
-                                            </Form.Control>
-                                        </Col>
-                                    </Row>
-                                    <Row className="mb-4">
-                                        <Col xs={1}>
-                                            <Form.Label>Valor*:</Form.Label>                                             
-                                        </Col>
-                                        <Col xs={10}>
-                                            <Form.Control 
-                                                type='text'                                                 
-                                                value={operacoes[0]?.['valor']}                                                
-                                                disabled
-                                            >
-                                            </Form.Control>
-                                        </Col>
-                                    </Row>
-                                    <Row className="mb-4">
-                                        <Col xs={1}>
-                                            <Form.Label>Descrição*:</Form.Label>                                             
-                                        </Col>
-                                        <Col xs={10}>
-                                            <Form.Control 
-                                                type='text' 
-                                                onChange={(e) => setDescricao(e.target.value)}
-                                                value={descricao}
-                                                required
-                                            >
-                                            </Form.Control>
-                                        </Col>
-                                    </Row>
-                                </Form.Group>
-                                <Form.Group className='mt-4'>
-                                    <Button type='submit'>Revisar</Button>
-                                </Form.Group> 
-                            </Card.Body>
-                        </Card>
-                    </Form>
-                </div>
+                        <div className="container-fluid">                                   
+                            <Form onSubmit={revisarOperacao}>
+                                <Card>
+                                    <Card.Body>
+                                        <Form.Group className='mb-4'>
+                                            <Row className="mb-4">
+                                                <Col xs={1}>
+                                                    <Form.Label>Operação*:</Form.Label>                                             
+                                                </Col>
+                                                <Col xs={10}>
+                                                    <Form.Control 
+                                                        type='text'                                                 
+                                                        value={operacoes[0]?.['tipo_operacao']}                                                
+                                                        disabled
+                                                    >
+                                                    </Form.Control>
+                                                </Col>
+                                            </Row>
+                                            <Row className="mb-4">
+                                                <Col xs={1}>
+                                                    <Form.Label>Valor*:</Form.Label>                                             
+                                                </Col>
+                                                <Col xs={10}>
+                                                    <Form.Control 
+                                                        type='text'                                                 
+                                                        value={operacoes[0]?.['valor']}                                                
+                                                        disabled
+                                                    >
+                                                    </Form.Control>
+                                                </Col>
+                                            </Row>
+                                            <Row className="mb-4">
+                                                <Col xs={1}>
+                                                    <Form.Label>Descrição*:</Form.Label>                                             
+                                                </Col>
+                                                <Col xs={10}>
+                                                    <Form.Control 
+                                                        type='text' 
+                                                        onChange={(e) => setDescricao(e.target.value)}
+                                                        value={descricao}
+                                                        required
+                                                    >
+                                                    </Form.Control>
+                                                </Col>
+                                            </Row>
+                                        </Form.Group>
+                                        <Form.Group className='mt-4'>
+                                            <Button type='submit'>Revisar</Button>
+                                        </Form.Group> 
+                                    </Card.Body>
+                                </Card>
+                            </Form>
+                        </div>
+                }                
             </div>
         </>
     )
