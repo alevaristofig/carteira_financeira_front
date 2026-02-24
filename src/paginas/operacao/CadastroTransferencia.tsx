@@ -23,11 +23,14 @@ const CadastroTransferencia = (): ReactElement => {
     const [descricao] = useState<string>('');
     const [tipo_operacao] = useState<string>('transferência');
     const [status] = useState<string>('aprovado');
+    const [loading,setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         if(sessionStorage.getItem('token') === null) {            
             navigate('/login');
         } 
+
+        setLoading(true);
     },[]);
 
     const cadastrar = (e: SubmitEvent<HTMLFormElement>) => {
@@ -51,6 +54,15 @@ const CadastroTransferencia = (): ReactElement => {
             <Cabecalho />
             <div className='d-flex mt-3'>
                 <Menu />
+                {
+                    loading
+                    ?
+                        <div className="spinner-border text-primary mt-3" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                    :
+                        ''
+                }
                 <div className="container-fluid">
                     <Form onSubmit={cadastrar}>
                         <Card>

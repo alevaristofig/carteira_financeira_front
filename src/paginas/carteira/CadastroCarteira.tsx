@@ -22,6 +22,7 @@ const CadastroCarteira = (): ReactElement => {
     const [titular,setTitular] = useState<string>();
     const [saldo] = useState<number>(0);
     const [valorNegativo] = useState<number>(0);
+    const [loading,setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         if(sessionStorage.getItem('token') === null) {            
@@ -32,6 +33,8 @@ const CadastroCarteira = (): ReactElement => {
 
     const cadastrar = (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        setLoading(true);
         
         dispatch(salvar({
             'user_id': sessionStorage.getItem('id'),
@@ -51,6 +54,15 @@ const CadastroCarteira = (): ReactElement => {
             <Cabecalho />
             <div className='d-flex mt-3'>
                 <Menu />
+                {
+                    loading
+                    ?
+                        <div className="spinner-border text-primary mt-3" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                    :
+                        ''
+                }
                 <div className="container-fluid">
                     <Form onSubmit={cadastrar}>
                         <Card>

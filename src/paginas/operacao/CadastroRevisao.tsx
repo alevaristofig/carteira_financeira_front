@@ -21,11 +21,14 @@ const CadastroRevisao = (): ReactElement => {
     const navigate = useNavigate();
 
     const [descricao,setDescricao] = useState<string>('');
+    const [loading,setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         if(sessionStorage.getItem('token') === null) {            
             navigate('/login');
         } 
+
+        setLoading(true);
 
         dispatch(buscar({
             'id': sessionStorage.getItem('id')
@@ -46,6 +49,15 @@ const CadastroRevisao = (): ReactElement => {
             <Cabecalho />
             <div className='d-flex mt-3'>
                 <Menu />
+                {
+                    loading
+                    ?
+                        <div className="spinner-border text-primary mt-3" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                    :
+                        ''
+                }
                 <div className="container-fluid">                                   
                     <Form onSubmit={revisarOperacao}>
                         <Card>

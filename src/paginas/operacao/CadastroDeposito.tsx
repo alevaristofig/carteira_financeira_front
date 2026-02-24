@@ -23,6 +23,7 @@ const CadastroDeposito = (): ReactElement => {
     const [descricao] = useState<string>('');
     const [tipo_operacao] = useState<string>('depósito');
     const [status] = useState<string>('aprovado');
+    const [loading,setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         if(sessionStorage.getItem('token') === null) {            
@@ -32,6 +33,8 @@ const CadastroDeposito = (): ReactElement => {
 
     const cadastrar = (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        setLoading(true);
 
         dispatch(depositar({
             'carteira': carteira,
@@ -52,6 +55,15 @@ const CadastroDeposito = (): ReactElement => {
             <Cabecalho />
             <div className='d-flex mt-3'>
                 <Menu />
+                {
+                    loading
+                    ?
+                        <div className="spinner-border text-primary mt-3" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                    :
+                        ''
+                }
                 <div className="container-fluid">
                     <Form onSubmit={cadastrar}>
                         <Card>

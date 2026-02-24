@@ -45,8 +45,7 @@ const Carteira = (): ReactElement => {
             <Cabecalho />
             <div className='d-flex mt-3'>
                 <Menu />                                             
-                 <div className="container-fluid">
-                    <Button as="a" href="cadastrocarteira" variant="primary">Cadastrar</Button>
+                 <div className="container-fluid">                    
                     {
                         loading
                         ?
@@ -56,9 +55,12 @@ const Carteira = (): ReactElement => {
                         :
                              carteiras.length === 0
                              ?
-                                <div className='me-2 float-start w-100'>
-                                    Não existem dados para exibir
-                                </div>
+                                <>
+                                    <Button as="a" href="cadastrocarteira" variant="primary">Cadastrar</Button>
+                                    <div className='me-2 float-start w-100'>
+                                        Não existem dados para exibir
+                                    </div>
+                                </>
                              :
                                 <Table className="responsive striped bordered hover">
                                     <thead>

@@ -20,9 +20,12 @@ const CadastroUsuario = (): ReactElement => {
     const [nome,setNome] = useState<string>('');
     const [email,setEmail] = useState<string>('');
     const [senha,setSenha] = useState<string>('');
+    const [loading,setLoading] = useState<boolean>(false);
 
     const cadastrar = (e: SubmitEvent<HTMLFormElement>): void => {
         e.preventDefault();
+
+        setLoading(true);
 
         dispatch(salvar({
             'nome': nome,
@@ -41,6 +44,15 @@ const CadastroUsuario = (): ReactElement => {
             <Cabecalho />
             <div className='d-flex mt-3'>               
                 <div className="container-fluid">
+                    {
+                        loading
+                        ?
+                            <div className="spinner-border text-primary mt-3" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div>
+                        :
+                            ''
+                    }
                     <Form onSubmit={cadastrar}>
                         <Card>
                             <Card.Body>
