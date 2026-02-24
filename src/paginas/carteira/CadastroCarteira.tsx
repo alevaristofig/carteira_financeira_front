@@ -1,5 +1,6 @@
 import { ReactElement, useState, SubmitEvent , useEffect } from "react";
 import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 import { salvar } from "../../redux/carteira/slice";
 
@@ -15,18 +16,25 @@ import Menu from "../../components/menu";
 const CadastroCarteira = (): ReactElement => {
 
     const dispatch = useDispatch();
-
-    const [userId] = useState<number>(2);
+    const navigate = useNavigate();
+    
     const [numero,setNumero] = useState<number>();
     const [titular,setTitular] = useState<string>();
     const [saldo] = useState<number>(0);
     const [valorNegativo] = useState<number>(0);
 
+    useEffect(() => {
+        if(sessionStorage.getItem('token') === null) {            
+            navigate('/login');
+        } 
+        
+    },[]);
+
     const cadastrar = (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
         
         dispatch(salvar({
-            'user_id': userId,
+            'user_id': sessionStorage.getItem('id'),
             'numero': numero,
             'titular': titular,
             'saldo': saldo,

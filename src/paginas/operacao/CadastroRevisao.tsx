@@ -1,6 +1,6 @@
 import { ReactElement, useState, SubmitEvent , useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { RootState } from "../../redux/root-reducer";
 import { buscar, revisar } from "../../redux/operacao/slice";

@@ -1,5 +1,6 @@
 import { ReactElement, useState, SubmitEvent , useEffect } from "react";
 import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 import { depositar } from "../../redux/operacao/slice";
 
@@ -15,12 +16,19 @@ import Menu from "../../components/menu";
 const CadastroDeposito = (): ReactElement => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [carteira,setCarteira] = useState<number>();
     const [valor,setValor] = useState<number>();
     const [descricao] = useState<string>('');
     const [tipo_operacao] = useState<string>('depósito');
     const [status] = useState<string>('aprovado');
+
+    useEffect(() => {
+        if(sessionStorage.getItem('token') === null) {            
+            navigate('/login');
+        } 
+    },[]);
 
     const cadastrar = (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
