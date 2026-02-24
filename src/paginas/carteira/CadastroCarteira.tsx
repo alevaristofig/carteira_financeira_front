@@ -40,6 +40,10 @@ const CadastroCarteira = (): ReactElement => {
             'saldo': saldo,
             'valorNegativo': valorNegativo
         }));
+
+        setTimeout(() => {
+            navigate('/carteira');       
+        },7000);
     }
 
     return(

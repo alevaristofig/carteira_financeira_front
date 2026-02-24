@@ -42,7 +42,7 @@ const Operacao = (): ReactElement => {
         <>
             <Cabecalho />
             <div className='d-flex mt-3'>
-                <Menu />
+                <Menu />                
                  <div className="container-fluid">
                     {
                         loading
@@ -51,7 +51,7 @@ const Operacao = (): ReactElement => {
                                 <span className="visually-hidden">Loading...</span>
                             </div>
                         :
-                             operacoes.length === 0
+                             !Array.isArray(operacoes)
                              ?
                                 <div className='me-2 float-start w-100'>
                                     Não existem dados para exibir
@@ -60,18 +60,20 @@ const Operacao = (): ReactElement => {
                                 <Table className="responsive striped bordered hover">
                                     <thead>
                                         <tr>                                                              
-                                            <th scope='col'>Descrição</th>
+                                            <th scope='col'>Operação</th>
                                             <th scope='col'>Valor</th> 
                                             <th scope='col'>Status</th>                                               
-                                            <th scope='col'>Data</th>                                            
+                                            <th scope='col'>Data</th> 
+                                            <th></th>                                           
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {
+                                            
                                             operacoes.map((p: any,i: number) => 
                                             (
                                                     <tr key={p['id']}>                                                                                                                
-                                                        <td>{p['descricao']}</td>
+                                                        <td>{p['tipo_operacao']}</td>
                                                         <td>{p['valor'].toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</td> 
                                                         <td>{p['status']}</td>                                                        
                                                         <td>{formatarData(p['created_at'])}</td>  

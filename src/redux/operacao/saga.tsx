@@ -53,8 +53,8 @@ function* depositar(action: AnyAction): Generator<any, void, AxiosResponse<IOper
         });
 
         yield put(depositarSucesso(response.data));
-  } catch(msg: any) {    
-     yield put(depositarError(msg.error));
+  } catch(error: any) {    
+     yield put(depositarError(error.response.data.error));
   }
 }
 
@@ -75,8 +75,8 @@ function* transferir(action: AnyAction): Generator<any, void, AxiosResponse<IOpe
         });
 
         yield put(transferirSucesso(response.data));
-  } catch(msg: any) {    
-     yield put(transferirError(msg.error));
+  } catch(error: any) {    
+     yield put(transferirError(error.response.data.error));
   }
 }
 
@@ -95,8 +95,8 @@ function* revisar(action: AnyAction): Generator<any, void, AxiosResponse<IOperac
         });
 
         yield put(revisarSucesso(response.data));
-  } catch(msg: any) {    
-     yield put(revisaoError(msg.error));
+  } catch(error: any) {    
+     yield put(revisaoError(error.response.data.error));
   }
 }
 

@@ -40,6 +40,11 @@ const CadastroDeposito = (): ReactElement => {
             'valor': valor,
             'status': status,            
         }));
+
+        setTimeout(() => {
+            navigate(`/operacao/${sessionStorage.getItem('id')}`);       
+        },7000);
+
     }
 
     return(

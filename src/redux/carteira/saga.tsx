@@ -25,8 +25,8 @@ function* salvar(action: AnyAction): Generator<any, void, AxiosResponse<ICarteir
         });
 
         yield put(salvarSucesso());
-  } catch(msg: any) {       
-     yield put(salvarError(msg.error));
+  } catch(error: any) { 
+     yield put(salvarError(error.response.data.error));
   }
 }
 

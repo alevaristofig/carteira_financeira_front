@@ -30,7 +30,10 @@ const CadastroUsuario = (): ReactElement => {
             'senha': senha  
         }));
 
-        navigate('/login');
+        setTimeout(() => {
+            navigate('/login');       
+        },7000);
+        
     }
 
     return(

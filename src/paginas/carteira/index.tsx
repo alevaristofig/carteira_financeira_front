@@ -1,6 +1,6 @@
 import { ReactElement, useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { RootState } from "../../redux/root-reducer";
 import { buscar } from "../../redux/carteira/slice";
