@@ -42,6 +42,10 @@ const CadastroRevisao = (): ReactElement => {
             'id': operacoes[0]?.['id'],
             'descricao': descricao
         }));
+
+        setTimeout(() => {
+            navigate(`/operacao/${sessionStorage.getItem('id')}`);       
+        },7000);
     }
 
     return(
